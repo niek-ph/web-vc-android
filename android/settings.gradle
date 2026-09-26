@@ -1,0 +1,13 @@
+pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
+plugins { id("com.facebook.react.settings") }
+def localProperties = new Properties()
+if (file('local.properties').exists()) {
+    file('local.properties').withInputStream { localProperties.load(it) }
+}
+def nodeBinary = localProperties.getProperty('node.binary', 'node')
+extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
+    ex.autolinkLibrariesFromCommand([nodeBinary, file('../node_modules/react-native/cli.js').absolutePath, 'config'])
+}
+rootProject.name = 'WebVCAndroid'
+include ':app'
+includeBuild('../node_modules/@react-native/gradle-plugin')
